@@ -1,21 +1,20 @@
 ## This file contains two functions makeCacheMatrix and cacheSolve 
 ## detailed below
 
-
 ## makeCacheMatrix sets up a list of functions that sets data matrix, 
 ## gets datamatrix, sets inverse of datamatrix, gets inverse matrix
-
+## This is superset of what is asked for.
 
 makeCacheMatrix <- function(x = matrix()) {
-  m <- NULL
-  set <- function(y) {
-    x <<- y
-    m <<- NULL
-  }
-  get <- function() x
-  setinverse <- function(inverse) m <<- inverse
-  getinverse <- function() m
-  list(set = set, get = get,
+    m <- NULL
+    set <- function(y) {
+        x <<- y
+        m <<- NULL
+    }
+    get <- function() x
+    setinverse <- function(inverse) m <<- inverse
+    getinverse <- function() m
+    list(set = set, get = get,
        setinverse = setinverse,
        getinverse = getinverse)
   
@@ -26,14 +25,14 @@ makeCacheMatrix <- function(x = matrix()) {
 ##  it pulls from cache, else it calculates it and stores in cache.
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-  m <- x$getinverse()
-  if(!is.null(m)) {
-    message("getting inverse matrix")
-    return(m)
-  }
-  data <- x$get()
-  m <- solve(data, ...)
-  x$setinverse(m)
-  m
+    ## Return a matrix that is the inverse of 'x'
+    m <- x$getinverse()
+    if(!is.null(m)) {
+        message("getting inverse matrix")
+        return(m)
+    }
+    data <- x$get()
+    m <- solve(data, ...)
+    x$setinverse(m)
+    m
 }
